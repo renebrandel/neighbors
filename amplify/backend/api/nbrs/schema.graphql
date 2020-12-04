@@ -1,0 +1,13 @@
+type Comment @model @auth(rules: [{allow: public}]) @key(name: "byListing", fields: ["listingID"]) {
+  id: ID!
+  description: String
+  listingID: ID!
+}
+
+type Listing @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  description: String
+  price: Int
+  Comments: [Comment] @connection(keyName: "byListing", fields: ["id"])
+}
